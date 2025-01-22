@@ -5,6 +5,7 @@ import { clearUserCart } from "../../features/cart/cartSlice";
 import { useNavigate } from "react-router";
 const PAYSTACK_KEY = import.meta.env.VITE_PAYSTACK_TEST_KEY;
 import axios from "axios";
+import { BACKEND_BASE_URL } from "../../utils/helper";
 
 const Payment = ({ checkOutFormData }) => {
   const dispatch = useDispatch();
@@ -29,15 +30,12 @@ const Payment = ({ checkOutFormData }) => {
         // console.log(userCartSummary);
         // console.log(cartItems);
 
-        const response = await axios.post(
-          "http://localhost:3000/api/v1/order/create",
-          {
-            reference,
-            checkOutFormData,
-            userCartSummary,
-            cartItems,
-          }
-        );
+        const response = await axios.post(`${BACKEND_BASE_URL}/order/create`, {
+          reference,
+          checkOutFormData,
+          userCartSummary,
+          cartItems,
+        });
 
         console.log(response);
 
