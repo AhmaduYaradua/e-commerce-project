@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema(
     transaction_reference: {
       transaction: String,
       status: String,
-      trxef: String,
+      trxref: String,
       message: String,
     },
     customer_delivery_info: {
@@ -22,8 +22,8 @@ const orderSchema = new mongoose.Schema(
       type: String,
       enum: {
         values: ["Pending", "Cancelled", "Completed"],
-        default: "Pending",
       },
+      default: "Pending",
     },
   },
   { timestamps: true }
