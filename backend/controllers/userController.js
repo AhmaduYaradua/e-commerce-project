@@ -1,7 +1,6 @@
 import { userModel } from "../models/userModel.js";
 import validator from "validator";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -84,12 +83,8 @@ const loginUser = async (req, res) => {
         .json({ message: "Email or password not correct", status: "Failed" });
     }
     user.password = undefined;
-    const token = await jwt.sign(
-      { userId: user._id, userType, name: user.name },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" }
-    );
-    res.status(200).json({ data: { ...user, token }, status: "success" });
+
+    res.status(200).json({ data: user, status: "success" });
   } catch (error) {
     res.status(400).json({ message: error.message, status: "Failed" });
   }
