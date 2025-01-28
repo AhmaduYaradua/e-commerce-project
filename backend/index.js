@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 
 import ordersRoute from "./routes/ordersRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import mongoose from "mongoose";
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(
 app.use(express.json());
 
 app.use("/api/v1/order", ordersRoute);
+app.use("/api/v1/auth", authRoutes);
 
 app.get("/server-health", (req, res) => {
   res.status(200).json({ message: "system is running successfully" });

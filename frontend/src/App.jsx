@@ -7,6 +7,11 @@ import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
 import Admin from "./pages/protected/Admin";
 import OrderDetails from "./pages/protected/OrderDetails";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Profile from "./pages/protected/Profile";
+import ProtectedLayout from "./layout/ProtectedLayout";
+import ProtectedAdminLayout from "./layout/ProtectedAdminLayout";
 
 function App() {
   return (
@@ -19,13 +24,20 @@ function App() {
           <Route path=":productId" element={<ProductDetails />} />
         </Route>
 
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="checkout" element={<Checkout />} />
 
-        <Route path="/admin">
-          <Route index element={<Admin />} />
-          <Route path=":orderId" element={<OrderDetails />} />
+        <Route element={<ProtectedLayout />}>
+          <Route path="admin" element={<ProtectedAdminLayout />}>
+            <Route index element={<Admin />} />
+            <Route path=":orderId" element={<OrderDetails />} />
+          </Route>
+
+          <Route path="profile" element={<Profile />} />
         </Route>
+
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
       </Route>
     </Routes>
   );

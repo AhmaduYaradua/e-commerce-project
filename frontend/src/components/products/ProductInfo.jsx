@@ -13,6 +13,7 @@ function ProductInfo() {
 
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
+  const { loginUser } = useSelector((state) => state.user);
   const [messageApi, contextHolder] = message.useMessage();
 
   function findProduct() {
@@ -69,6 +70,7 @@ function ProductInfo() {
         </p>
 
         <button
+          disabled={loginUser && loginUser.userType === "admin" ? true : false}
           onClick={handleCartItem}
           className="bg-green-700 w-full py-2 text-lg font-semibold text-white mt-4 rounded-md border-2 border-green- hover:bg-white hover:text-green-700 transition-colors duration-300 cursor-pointer max-w-[250px] ml-60"
         >
